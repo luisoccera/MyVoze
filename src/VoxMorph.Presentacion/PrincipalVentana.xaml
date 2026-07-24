@@ -1,0 +1,299 @@
+<Window x:Class="VoxMorph.Presentacion.PrincipalVentana"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MyVoze - Cambiador de voz"
+        Width="1240"
+        Height="800"
+        MinWidth="1040"
+        MinHeight="680"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="22">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="MYVOZE" FontSize="27" FontWeight="Bold" Foreground="{StaticResource ColorCian}" />
+                <TextBlock Text="Tu voz, tus reglas. Procesamiento local en tiempo real." Foreground="{StaticResource TextoSecundario}" />
+            </StackPanel>
+            <Border Grid.Column="1" Background="{StaticResource FondoPanel}" CornerRadius="12" Padding="16,10">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="10" Height="10" Fill="{StaticResource ColorCian}" Margin="0,0,9,0" />
+                    <TextBlock Text="{Binding EstadoTexto}" VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="235" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="330" />
+            </Grid.ColumnDefinitions>
+
+            <Border Background="{StaticResource FondoPanel}" CornerRadius="16" Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="PERFILES DE VOZ" FontWeight="SemiBold" Foreground="{StaticResource TextoSecundario}" Margin="4,0,0,10" />
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding Perfiles}"
+                             SelectedItem="{Binding PerfilSeleccionado}"
+                             DisplayMemberPath="Nombre" />
+                    <StackPanel Grid.Row="2" Margin="0,12,0,0">
+                        <TextBox Text="{Binding NombreNuevoPerfil, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button Content="Guardar como nuevo" Command="{Binding ComandoGuardarPerfil}" />
+                        <Button Content="Eliminar personalizado" Command="{Binding ComandoEliminarPerfil}" />
+                        <Button Content="Restablecer controles" Command="{Binding ComandoRestablecerPerfil}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Background="{StaticResource FondoPanel}" CornerRadius="16" Padding="18">
+                <TabControl Background="Transparent" BorderThickness="0">
+                    <TabItem Header="Ruta de audio">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="8,14,8,8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="12" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="Micrófono físico" Margin="0,0,0,5" />
+                                        <ComboBox ItemsSource="{Binding Entradas}"
+                                                  SelectedItem="{Binding EntradaSeleccionada}"
+                                                  DisplayMemberPath="Nombre" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Salida virtual (VB-CABLE)" Margin="0,0,0,5" />
+                                        <ComboBox ItemsSource="{Binding SalidasVirtuales}"
+                                                  SelectedItem="{Binding SalidaSeleccionada}"
+                                                  DisplayMemberPath="Nombre" />
+                                    </StackPanel>
+                                </Grid>
+                                <Button Content="Actualizar dispositivos"
+                                        Command="{Binding ComandoActualizarDispositivos}"
+                                        HorizontalAlignment="Left"
+                                        Margin="0,10,0,6" />
+
+                                <Border Background="#102A30"
+                                        BorderBrush="#1D6670"
+                                        BorderThickness="1"
+                                        CornerRadius="10"
+                                        Padding="12"
+                                        Margin="0,4,0,14">
+                                    <TextBlock Text="{Binding EstadoSalidaVirtual}"
+                                               TextWrapping="Wrap"
+                                               Foreground="#A5F3FC" />
+                                </Border>
+
+                                <TextBlock Text="Monitoreo por audífonos" />
+                                <ComboBox ItemsSource="{Binding Monitores}"
+                                          SelectedItem="{Binding MonitoreoSeleccionado}"
+                                          DisplayMemberPath="Nombre"
+                                          Margin="0,5,0,6" />
+                                <CheckBox Content="Escuchar voz procesada"
+                                          IsChecked="{Binding MonitoreoHabilitado}"
+                                          Foreground="{StaticResource TextoPrincipal}" />
+                                <TextBlock Text="{Binding EstadoMonitoreo}"
+                                           Foreground="{StaticResource TextoSecundario}"
+                                           Margin="0,4,0,16" />
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Entrada" Foreground="{StaticResource TextoSecundario}" />
+                                    <TextBlock Grid.Column="1" Text="{Binding NivelEntrada, StringFormat={}{0:P0}}" />
+                                </Grid>
+                                <ProgressBar Minimum="0" Maximum="1" Value="{Binding NivelEntrada, Mode=OneWay}" Margin="0,5,0,12" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Salida procesada" Foreground="{StaticResource TextoSecundario}" />
+                                    <TextBlock Grid.Column="1" Text="{Binding NivelSalida, StringFormat={}{0:P0}}" />
+                                </Grid>
+                                <ProgressBar Minimum="0" Maximum="1" Value="{Binding NivelSalida, Mode=OneWay}" Margin="0,5,0,4" />
+                                <TextBlock Text="SATURACIÓN: reduce ganancia o volumen"
+                                           Foreground="{StaticResource ColorError}"
+                                           FontWeight="Bold"
+                                           Visibility="{Binding EstaSaturando, Converter={StaticResource BooleanoAVisibilidad}}"
+                                           Margin="0,4,0,8" />
+
+                                <Button Style="{StaticResource BotonPrincipal}"
+                                        Content="{Binding TextoBotonPrincipal}"
+                                        Command="{Binding ComandoIniciarDetener}" />
+                                <Button Content="{Binding TextoBotonSilencio}"
+                                        Command="{Binding ComandoSilenciar}" />
+
+                                <Border Background="#341620" BorderBrush="#8B3048" BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,10,0,0">
+                                    <TextBlock Text="{Binding MensajeError}" TextWrapping="Wrap" Foreground="{StaticResource ColorError}" />
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <TabItem Header="Soundboard">
+                        <Grid Margin="8,14,8,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ListBox ItemsSource="{Binding Sonidos}" SelectedItem="{Binding SonidoSeleccionado}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Nombre}" FontWeight="SemiBold" />
+                                            <TextBlock Text="{Binding Ruta}" Foreground="{StaticResource TextoSecundario}" TextTrimming="CharacterEllipsis" />
+                                            <Grid Margin="0,4,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="95" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="Volumen" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                                <Slider Grid.Column="1" Minimum="0" Maximum="1.5" Value="{Binding Volumen}" />
+                                                <TextBox Grid.Column="2" Text="{Binding Atajo}" ToolTip="Ejemplo: Ctrl+Alt+1" Margin="8,0,0,0" />
+                                            </Grid>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <WrapPanel Grid.Row="1" Margin="0,12,0,0">
+                                <Button Content="Importar WAV/MP3" Command="{Binding ComandoImportarSonidos}" />
+                                <Button Content="Reproducir" Command="{Binding ComandoReproducirSonido}" />
+                                <Button Content="Detener todos" Command="{Binding ComandoDetenerSonidos}" />
+                                <Button Content="Eliminar" Command="{Binding ComandoEliminarSonido}" />
+                            </WrapPanel>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Atajos">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="8,14,8,8">
+                                <TextBlock Text="Usa combinaciones como Ctrl+Alt+M." Foreground="{StaticResource TextoSecundario}" Margin="0,0,0,10" />
+                                <TextBlock Text="Silenciar micrófono" />
+                                <TextBox Text="{Binding AtajoSilencio}" />
+                                <TextBlock Text="Iniciar o detener motor" Margin="0,8,0,0" />
+                                <TextBox Text="{Binding AtajoMotor}" />
+                                <TextBlock Text="Perfil siguiente" Margin="0,8,0,0" />
+                                <TextBox Text="{Binding AtajoPerfilSiguiente}" />
+                                <TextBlock Text="Perfil anterior" Margin="0,8,0,0" />
+                                <TextBox Text="{Binding AtajoPerfilAnterior}" />
+                                <TextBlock Text="Detener sonidos" Margin="0,8,0,0" />
+                                <TextBox Text="{Binding AtajoDetenerSonidos}" />
+                                <Button Content="Aplicar atajos globales"
+                                        Command="{Binding ComandoAplicarAtajos}"
+                                        Margin="0,14,0,0" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Border>
+
+            <Border Grid.Column="4" Background="{StaticResource FondoPanel}" CornerRadius="16" Padding="18">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="EFECTOS" FontWeight="SemiBold" Foreground="{StaticResource TextoSecundario}" Margin="0,0,0,12" />
+
+                        <TextBlock Text="Tono" />
+                        <TextBlock Text="{Binding Pitch, StringFormat={}{0:F2}x}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0.5" Maximum="2" Value="{Binding Pitch, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Ganancia" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding GananciaDb, StringFormat={}{0:F1} dB}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="-12" Maximum="12" Value="{Binding GananciaDb, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Graves" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding GravesDb, StringFormat={}{0:F1} dB}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="-12" Maximum="12" Value="{Binding GravesDb, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Medios" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding MediosDb, StringFormat={}{0:F1} dB}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="-12" Maximum="12" Value="{Binding MediosDb, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Agudos" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding AgudosDb, StringFormat={}{0:F1} dB}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="-12" Maximum="12" Value="{Binding AgudosDb, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Puerta de ruido" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding UmbralRuidoDb, StringFormat={}{0:F0} dB}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="-70" Maximum="-20" Value="{Binding UmbralRuidoDb, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Limpieza IA (RNNoise)" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding ReduccionRuido, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding ReduccionRuido, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Feminización natural" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding Feminizacion, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding Feminizacion, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Distorsión" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding Distorsion, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding Distorsion, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Robot" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding RobotMezcla, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding RobotMezcla, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Frecuencia robot" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding RobotFrecuenciaHz, StringFormat={}{0:F0} Hz}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="20" Maximum="240" Value="{Binding RobotFrecuenciaHz, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Filtro telefónico" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding FiltroTelefonico, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding FiltroTelefonico, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Trémolo" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding TremoloMezcla, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding TremoloMezcla, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Velocidad del trémolo" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding TremoloFrecuenciaHz, StringFormat={}{0:F1} Hz}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0.5" Maximum="20" Value="{Binding TremoloFrecuenciaHz, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Eco" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding EcoMezcla, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="0.75" Value="{Binding EcoMezcla, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Demora del eco" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding EcoMilisegundos, StringFormat={}{0:F0} ms}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="60" Maximum="600" Value="{Binding EcoMilisegundos, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Mezcla del efecto" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding MezclaEfecto, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding MezclaEfecto, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Text="Volumen final" Margin="0,10,0,0" />
+                        <TextBlock Text="{Binding VolumenFinal, StringFormat={}{0:P0}}" Foreground="{StaticResource ColorCian}" HorizontalAlignment="Right" Margin="0,-18,0,0" />
+                        <Slider Minimum="0" Maximum="1.5" Value="{Binding VolumenFinal, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <TextBlock Grid.Row="4"
+                   Text="MyVoze procesa el audio localmente. Usa audífonos para evitar eco y retroalimentación."
+                   Foreground="{StaticResource TextoSecundario}"
+                   HorizontalAlignment="Center" />
+    </Grid>
+</Window>

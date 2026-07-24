@@ -1,0 +1,81 @@
+# Visual Studio, Rider y VS Code
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.rsuser
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+*.csproj.user
+
+# Compilación, pruebas y paquetes .NET
+[Bb]in/
+[Oo]bj/
+[Aa]rtifacts/
+[Tt]est[Rr]esults/
+[Ll]ogs/
+coverage/
+packages/
+*.coverage
+*.coveragexml
+*.trx
+*.nupkg
+*.snupkg
+
+# Publicaciones y verificaciones locales
+Publicacion/
+publish/
+**/*-check/
+*.pubxml.user
+
+# Archivos temporales y del sistema
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+$RECYCLE.BIN/
+*.tmp
+*.temp
+*.log
+*.bak
+*.cache
+*.dmp
+*.pid
+~$*
+
+# Configuración local, credenciales y secretos
+.env
+.env.*
+!.env.example
+secrets.json
+*.secrets.json
+credentials*.json
+token*.json
+appsettings.Local.json
+appsettings.*.local.json
+
+# Certificados y claves privadas
+*.pfx
+*.p12
+*.pem
+*.key
+*.pvk
+*.snk
+*.cer
+*.crt
+
+# Modelos de IA pesados (se obtienen por separado)
+*.onnx
+*.ort
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.gguf
+*.ggml
+*.tflite
+*.engine
+*.rvc
+*.index

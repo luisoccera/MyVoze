@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.22000.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AssemblyName>MyVoze</AssemblyName>
+    <RootNamespace>VoxMorph.Controlador</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoxMorph.Audio\VoxMorph.Audio.csproj" />
+    <ProjectReference Include="..\VoxMorph.Presentacion\VoxMorph.Presentacion.csproj" />
+  </ItemGroup>
+</Project>

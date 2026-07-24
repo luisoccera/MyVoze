@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "MyVoze",
+    "Projects": [
+      {
+        "Path": "src\\VoxMorph.Controlador\\VoxMorph.Controlador.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

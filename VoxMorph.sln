@@ -1,0 +1,45 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxMorph.Controlador", "src\VoxMorph.Controlador\VoxMorph.Controlador.csproj", "{8D2D7D10-73B6-4D8F-A7F0-6247F35EED91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxMorph.Presentacion", "src\VoxMorph.Presentacion\VoxMorph.Presentacion.csproj", "{57B0F093-E60A-4E12-B449-654BD6E297C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxMorph.Audio", "src\VoxMorph.Audio\VoxMorph.Audio.csproj", "{74FB4D82-DA9D-4387-8017-CAEA1C0A1F3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxMorph.Entidades", "src\VoxMorph.Entidades\VoxMorph.Entidades.csproj", "{B6769D53-9608-489B-A271-302922744AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxMorph.Pruebas", "tests\VoxMorph.Pruebas\VoxMorph.Pruebas.csproj", "{4F647FB0-9603-43ED-A0A3-A5C52CA7594B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D2D7D10-73B6-4D8F-A7F0-6247F35EED91}.Debug|x64.ActiveCfg = Debug|x64
+		{8D2D7D10-73B6-4D8F-A7F0-6247F35EED91}.Debug|x64.Build.0 = Debug|x64
+		{8D2D7D10-73B6-4D8F-A7F0-6247F35EED91}.Release|x64.ActiveCfg = Release|x64
+		{8D2D7D10-73B6-4D8F-A7F0-6247F35EED91}.Release|x64.Build.0 = Release|x64
+		{B6769D53-9608-489B-A271-302922744AC1}.Debug|x64.ActiveCfg = Debug|x64
+		{B6769D53-9608-489B-A271-302922744AC1}.Debug|x64.Build.0 = Debug|x64
+		{B6769D53-9608-489B-A271-302922744AC1}.Release|x64.ActiveCfg = Release|x64
+		{B6769D53-9608-489B-A271-302922744AC1}.Release|x64.Build.0 = Release|x64
+		{74FB4D82-DA9D-4387-8017-CAEA1C0A1F3D}.Debug|x64.ActiveCfg = Debug|x64
+		{74FB4D82-DA9D-4387-8017-CAEA1C0A1F3D}.Debug|x64.Build.0 = Debug|x64
+		{74FB4D82-DA9D-4387-8017-CAEA1C0A1F3D}.Release|x64.ActiveCfg = Release|x64
+		{74FB4D82-DA9D-4387-8017-CAEA1C0A1F3D}.Release|x64.Build.0 = Release|x64
+		{57B0F093-E60A-4E12-B449-654BD6E297C0}.Debug|x64.ActiveCfg = Debug|x64
+		{57B0F093-E60A-4E12-B449-654BD6E297C0}.Debug|x64.Build.0 = Debug|x64
+		{57B0F093-E60A-4E12-B449-654BD6E297C0}.Release|x64.ActiveCfg = Release|x64
+		{57B0F093-E60A-4E12-B449-654BD6E297C0}.Release|x64.Build.0 = Release|x64
+		{4F647FB0-9603-43ED-A0A3-A5C52CA7594B}.Debug|x64.ActiveCfg = Debug|x64
+		{4F647FB0-9603-43ED-A0A3-A5C52CA7594B}.Debug|x64.Build.0 = Debug|x64
+		{4F647FB0-9603-43ED-A0A3-A5C52CA7594B}.Release|x64.ActiveCfg = Release|x64
+		{4F647FB0-9603-43ED-A0A3-A5C52CA7594B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
